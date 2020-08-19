@@ -35,6 +35,9 @@ RUN curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.7.
  && rm ~/miniconda.sh \
  && conda install -y python==3.6.9 \
  && conda clean -ya
+ 
+# Requirements
+RUN conda install --file requirements.yml
 
 # CUDA 10.1-specific steps
 RUN conda install -y -c pytorch \
@@ -43,7 +46,6 @@ RUN conda install -y -c pytorch \
     "torchvision=0.5.0=py36_cu101" \
  && conda clean -ya
 
-RUN conda install --file requirements.yml
 
 # Set the default command to python3
 CMD ["python3"]
