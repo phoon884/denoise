@@ -38,13 +38,13 @@ RUN curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.7.
  
 # Requirements
 RUN curl -sL https://raw.githubusercontent.com/ZurMaD/fastdvdnet/master/requirements.yml -o requirements.yml
-RUN conda -f requirements.yml
 
 # CUDA 10.1-specific steps
 RUN conda install -y -c pytorch \
     cudatoolkit=10.1 \
     "pytorch=1.4.0=py3.6_cuda10.1.243_cudnn7.6.3_0" \
     "torchvision=0.5.0=py36_cu101" \
+    -f requirements.yml \
  && conda clean -ya
 
 
