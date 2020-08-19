@@ -44,20 +44,21 @@ def save_out_seq(seqnoisy, seqclean, save_dir, sigmaval, suffix, save_noisy):
 		cv2.imwrite(out_name, outimg)
 
 def test_fastdvdnet(**args):
-	"""Denoises all sequences present in a given folder. Sequences must be stored as numbered
-	image sequences. The different sequences must be stored in subfolders under the "test_path" folder.
+	"""
+	Denoises all sequences present in a given folder. Sequences must be stored as numbered
+	image sequences. The different sequences must be stored in subfolders under the 'test_path' folder.
 
 	Inputs:
 		args (dict) fields:
-			"model_file": path to model
-			"test_path": path to sequence to denoise
-			"suffix": suffix to add to output name
-			"max_num_fr_per_seq": max number of frames to load per sequence
-			"noise_sigma": noise level used on test set
-			"dont_save_results: if True, don't save output images
-			"no_gpu": if True, run model on CPU
-			"save_path": where to save outputs as png
-			"gray": if True, perform denoising of grayscale images instead of RGB
+			'model_file': path to model
+			'test_path': path to sequence to denoise
+			'suffix': suffix to add to output name
+			'max_num_fr_per_seq': max number of frames to load per sequence
+			'noise_sigma': noise level used on test set
+			'dont_save_results': if True, don't save output images
+			'no_gpu': if True, run model on CPU
+			'save_path': where to save outputs as png
+			'gray': if True, perform denoising of grayscale images instead of RGB
 	"""
 	# Start time
 	start_time = time.time()
