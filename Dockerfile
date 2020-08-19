@@ -38,7 +38,7 @@ RUN curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.7.
  
 # Requirements
 RUN curl -sL https://raw.githubusercontent.com/ZurMaD/fastdvdnet/master/requirements.yml -o requirements.yml
-RUN conda env create -f requirements.yml -n condafastdvdnetenv
+RUN conda -f requirements.yml
 
 # CUDA 10.1-specific steps
 RUN conda install -y -c pytorch \
