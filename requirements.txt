@@ -1,5 +1,5 @@
-pytorch==1.0.0
-torchvision==0.2.1
+torch==1.0.1
+torchvision==0.2.2
 scikit-image==0.16.2
 pytest==5.4.1
 pycodestyle==2.5.0
