@@ -36,10 +36,6 @@ RUN curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.7.
  && conda install -y python==3.6.9 \
  && conda clean -ya
  
-# Requirements
-# RUN curl -sL https://raw.githubusercontent.com/ZurMaD/fastdvdnet/master/requirements.txt -o requirements.txt
-# RUN pip install -r requirements.txt
-
 # CUDA 10.1-specific steps
 RUN conda install -y -c pytorch \
     cudatoolkit=10.1 \
@@ -51,6 +47,10 @@ RUN conda install -y -c pytorch \
     "pytest==5.4.1" \
     "scikit-image==0.16.2" \ 
  && conda clean -ya
+ 
+# Requirements
+RUN curl -sL https://raw.githubusercontent.com/ZurMaD/fastdvdnet/master/requirements.txt -o requirements.txt
+RUN pip install -r requirements.txt
 
 
 # Set the default command to python3
