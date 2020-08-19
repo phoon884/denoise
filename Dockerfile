@@ -37,8 +37,7 @@ RUN curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.7.
  && conda clean -ya
  
 # Requirements
-RUN sudo apt-get install -y wget
-RUN wget https://raw.githubusercontent.com/ZurMaD/fastdvdnet/master/requirements.yml -O requirements.yml
+RUN curl -sL https://raw.githubusercontent.com/ZurMaD/fastdvdnet/master/requirements.yml -o requirements.yml
 RUN conda install --file ./requirements.yml
 
 # CUDA 10.1-specific steps
