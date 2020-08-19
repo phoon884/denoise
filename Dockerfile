@@ -48,9 +48,10 @@ RUN conda install -y -c pytorch \
     "scikit-image==0.16.2" \ 
  && conda clean -ya
  
+RUN pip install tensorboardX==2.0
 # Requirements
-RUN curl -sL https://raw.githubusercontent.com/ZurMaD/fastdvdnet/master/requirements.txt -o requirements.txt
-RUN pip install -r requirements.txt
+# RUN curl -sL https://raw.githubusercontent.com/ZurMaD/fastdvdnet/master/requirements.txt -o requirements.txt
+# RUN pip install -r requirements.txt
 
 
 # Set the default command to python3
