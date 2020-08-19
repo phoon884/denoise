@@ -125,8 +125,7 @@ def test_fastdvdnet(**args):
 	# Save outputs
 	if not args['dont_save_results']:
 		# Save sequence
-		save_out_seq(seqn, denframes, args['save_path'], \
-					   int(args['noise_sigma']*255), args['suffix'], args['save_noisy'])
+		save_out_seq(seqn, denframes, args['save_path'], int(args['noise_sigma']*255), args['suffix'], args['save_noisy'])
 
 	# close logger
 	close_logger(logger)
