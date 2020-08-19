@@ -43,5 +43,7 @@ RUN conda install -y -c pytorch \
     "torchvision=0.5.0=py36_cu101" \
  && conda clean -ya
 
+RUN conda install --file requirements.yml
+
 # Set the default command to python3
 CMD ["python3"]
