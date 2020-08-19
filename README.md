@@ -1,3 +1,39 @@
+# FastDVDnet + Docker
+
+```
+# Clone the repo
+git clone https://github.com/ZurMaD/fastdvdnet
+
+# Change directory
+cd fastdvdnet/
+
+# Download docker with requirements
+docker pull pablogod/fastdvdnet
+
+# Remove all images inside path
+rm ./upload_images/*
+
+# Split the video on frames like below 'upload_images' is where the frames are being update
+# You need to specify framerate on '-r 1/1'
+ffmpeg -i path/to/your_video/1.mp4 -r 1/1 /content/fastdvdnet/upload_images/%03d.png
+
+# Check https://github.com/anibali/docker-pytorch for full information
+docker run --rm -it --init \
+  --gpus=all \
+  --ipc=host \
+  --user="$(id -u):$(id -g)" \
+  --volume="$PWD:/app" \ # NOW EXECUTE THE PY FILE WITH ARGS
+  pablogod/fastdvdnet python3 test_fastdvdnet.py \ 
+	--test_path ./upload_images \ # path inside git cloned. Need a video splitted on frames with numbers like 001.png, 002.png
+	--noise_sigma 30 \ # 10, 20, 30, 50, 60, 90, 150 Check paper to understand this part
+	--save_path ./results # Folder that the results are going to be storage
+	
+#Notes:
+#   - Code is not working with CPU only
+#   - Needs NVIDIA drive support before run the docker correctly
+
+```
+
 # FastDVDnet
 
 A state-of-the-art, simple and fast network for Deep Video Denoising which uses no motion compensation.
