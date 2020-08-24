@@ -16,7 +16,7 @@ from utils import batch_psnr, init_logger_test, \
 
 NUM_IN_FR_EXT = 5 # temporal size of patch
 MC_ALGO = 'DeepFlow' # motion estimation algorithm
-OUTIMGEXT = '.jpg' # output images format
+OUTIMGEXT = '.png' # output images format
 
 def save_out_seq(seqnoisy, seqclean, save_dir, sigmaval, suffix, save_noisy):
 	"""Saves the denoised and noisy sequences under save_dir
