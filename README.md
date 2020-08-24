@@ -25,7 +25,7 @@ docker run --rm -it --init \
   --volume="$PWD:/app" \ # NOW EXECUTE THE PY FILE WITH ARGS
   pablogod/fastdvdnet python3 test_fastdvdnet.py \ 
 	--test_path ./upload_images \ # path inside git cloned. Need a video splitted on frames with numbers like 001.png, 002.png
-	--noise_sigma 30 \ # 10, 20, 30, 50, 60, 90, 150 Check paper to understand this part
+	--noise_sigma 30 \ # [5,45] Check paper to understand this part
 	--save_path ./results # Folder that the results are going to be storage
 	
 #Notes:
