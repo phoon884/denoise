@@ -176,6 +176,7 @@ class FastDVDnet(nn.Module):
 		# Unpack inputs
 		(x0, x1, x2, x3, x4) = tuple(x[:, 3*m:3*m+3, :, :] for m in range(self.num_input_frames))
 		(nm0 , nm1 ,nm2 ,nm3, nm4) = tuple(noise_map[:, 3*m:3*m+3, :, :] for m in range(self.num_input_frames))
+		print(x1.shape,nm1.shape,nm2.shape)
 		# First stage
 		x20 = self.temp1(x0, x1, x2, nm1)
 		x21 = self.temp1(x1, x2, x3, nm2)
