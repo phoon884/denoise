@@ -70,7 +70,7 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 			del noise_frame[0]
 			relidx = min(fridx + ctrlfr_idx, -fridx + 2*(numframes-1)-ctrlfr_idx) # handle border conditions
 			inframes.append(seq[relidx])
-			noise_frame.append(noise_map[relidx])
+			noise_frame.append(noise_map[relidx].reshape( 1, 1, H, W ) )
 
 		inframes_t = torch.stack(inframes, dim=0).contiguous().view((1, temp_psz*C, H, W)).to(seq.device)
 
