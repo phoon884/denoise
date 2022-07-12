@@ -128,7 +128,7 @@ class DenBlock(nn.Module):
 		'''
 		# Input convolution block
 		#print(in0.shape , noise_map.shape)
-		x0 = self.inc(torch.cat((in0, noise_map[None, :, :, :], in1, noise_map[None, :, :, :], in2, noise_map[None, :, :, :]), dim=1))
+		x0 = self.inc(torch.cat((in0, noise_map[0][None, :, :, :], in1, noise_map[1][None, :, :, :], in2, noise_map[2][None, :, :, :]), dim=1))
 		# Downsampling
 		x1 = self.downc0(x0)
 		x2 = self.downc1(x1)
@@ -175,14 +175,14 @@ class FastDVDnet(nn.Module):
 		'''
 		# Unpack inputs
 		(x0, x1, x2, x3, x4) = tuple(x[:, 3*m:3*m+3, :, :] for m in range(self.num_input_frames))
-		nm1 ,nm2 ,nm3 = noise_map[0,:,:,:] ,noise_map[1,:,:,:], noise_map[2,:,:,:]
+		nm0, nm1 ,nm2 ,nm3, nm4 = noise_map[0,:,:,:] ,noise_map[1,:,:,:], noise_map[2,:,:,:] ,noise_map[3,:,:,:],noise_map[4,:,:,:]
 		print(noise_map.shape)
 		# First stage
-		x20 = self.temp1(x0, x1, x2, nm1)
-		x21 = self.temp1(x1, x2, x3, nm2)
-		x22 = self.temp1(x2, x3, x4, nm3)
+		x20 = self.temp1(x0, x1, x2, (nm0 , nm1, nm2))
+		x21 = self.temp1(x1, x2, x3, (nm1 , nm2, nm3))
+		x22 = self.temp1(x2, x3, x4, (nm2 , nm3, nm4))
 
 		#Second stage
-		x = self.temp2(x20, x21, x22, nm2)
+		x = self.temp2(x20, x21, x22, (nm1 , nm2, nm3))
 
 		return x

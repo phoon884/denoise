@@ -75,7 +75,7 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 		inframes_t = torch.stack(inframes, dim=0).contiguous().view((1, temp_psz*C, H, W)).to(seq.device)
 
 		# append result to output list
-		denframes[fridx] = temp_denoise(model_temporal, inframes_t, noise_map)
+		denframes[fridx] = temp_denoise(model_temporal, inframes_t, noise_frame)
 
 	# free memory up
 	del inframes
