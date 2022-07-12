@@ -86,7 +86,7 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 
 def grayscale(seq):
 	numframes, C, H, W = seq.shape
-	res = torch.floatTensor(numframes, 1, H, W)
+	res = torch.FloatTensor(numframes, 1, H, W)
 	for i , frame in enumerate(seq):
 		r,g,b = frame[0], frame[1], frame[2]
 		gray = 0.2989 * r + 0.5870*g + 0.1140*b
