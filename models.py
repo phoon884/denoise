@@ -127,7 +127,7 @@ class DenBlock(nn.Module):
 			noise_map: Tensor [N, 1, H, W] in the [0., 1.] range
 		'''
 		# Input convolution block
-		print(in0.shape)
+		print(in0.shape , noise_map.shape)
 		x0 = self.inc(torch.cat((in0, noise_map, in1, noise_map, in2, noise_map), dim=1))
 		# Downsampling
 		x1 = self.downc0(x0)
