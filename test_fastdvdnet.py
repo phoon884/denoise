@@ -80,7 +80,11 @@ def test_fastdvdnet(**args):
     model_temp = FastDVDnet(num_input_frames=NUM_IN_FR_EXT)
 
     # Load saved weights
-    state_temp_dict = torch.load(args['model_file'])
+    
+    if args['cuda']:
+      state_temp_dict = torch.load(args['model_file'])
+    else:
+      state_temp_dict = torch.load(args['model_file'], map_location="cpu")
     if args['cuda']:
         device_ids = [0]
         model_temp = nn.DataParallel(model_temp, device_ids=device_ids).cuda()
