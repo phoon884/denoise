@@ -54,7 +54,7 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 	inframes = list()
 	noise_frame = list()
 	denframes = torch.empty((numframes, C, H, W)).to(seq.device)
-
+	print(type(noise_std.expand((numframes, 1, H, W)).to(seq.device)))
 	# build noise map from noise std---assuming Gaussian noise
 	noise_map = noise_std.expand((numframes, 1, H, W)).to(seq.device) + gray*noise_scaler
 
