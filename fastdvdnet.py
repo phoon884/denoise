@@ -47,10 +47,11 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 	# init arrays to handle contiguous frames and related patches
 	numframes, C, H, W = seq.shape
 	gray = grayscale(seq)
-	print()
+	print(gray)
 	#gray = torch.mul(transforms.functional.invert(transform(seq)), noise_scaler)
 	ctrlfr_idx = int((temp_psz-1)//2)
 	inframes = list()
+	noise_frame = list()
 	denframes = torch.empty((numframes, C, H, W)).to(seq.device)
 
 	# build noise map from noise std---assuming Gaussian noise
@@ -63,10 +64,13 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 			for idx in range(temp_psz):
 				relidx = abs(idx-ctrlfr_idx) # handle border conditions, reflect
 				inframes.append(seq[relidx])
+				noise_frame.append(noise_map[relidx])
 		else:
 			del inframes[0]
+			del noise_frame[0]
 			relidx = min(fridx + ctrlfr_idx, -fridx + 2*(numframes-1)-ctrlfr_idx) # handle border conditions
 			inframes.append(seq[relidx])
+			noise_frame.append(noise_map[relidx])
 
 		inframes_t = torch.stack(inframes, dim=0).contiguous().view((1, temp_psz*C, H, W)).to(seq.device)
 
