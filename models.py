@@ -127,7 +127,7 @@ class DenBlock(nn.Module):
 			noise_map: Tensor [N, 1, H, W] in the [0., 1.] range
 		'''
 		# Input convolution block
-		print(noise_map[0])
+		# print(noise_map[0])
 		x0 = self.inc(torch.cat((in0, noise_map[0][None, :, :, :], in1, noise_map[1][None, :, :, :], in2, noise_map[2][None, :, :, :]), dim=1))
 		# Downsampling
 		x1 = self.downc0(x0)
@@ -176,7 +176,7 @@ class FastDVDnet(nn.Module):
 		# Unpack inputs
 		(x0, x1, x2, x3, x4) = tuple(x[:, 3*m:3*m+3, :, :] for m in range(self.num_input_frames))
 		nm0, nm1 ,nm2 ,nm3, nm4 = noise_map[0,:,:,:] ,noise_map[1,:,:,:], noise_map[2,:,:,:] ,noise_map[3,:,:,:],noise_map[4,:,:,:]
-		print(noise_map.shape)
+		# print(noise_map.shape)
 		# First stage
 		x20 = self.temp1(x0, x1, x2, (nm0 , nm1, nm2))
 		x21 = self.temp1(x1, x2, x3, (nm1 , nm2, nm3))

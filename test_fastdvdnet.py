@@ -120,15 +120,15 @@ def test_fastdvdnet(**args):
     # Compute PSNR and log it
     stop_time = time.time()
     psnr = batch_psnr(denframes, seq, 1.)
-    psnr_noisy = batch_psnr(seqn.squeeze(), seq, 1.)
+    #psnr_noisy = batch_psnr(seqn.squeeze(), seq, 1.)
     loadtime = (seq_time - start_time)
     runtime = (stop_time - seq_time)
     seq_length = seq.size()[0]
     logger.info("Finished denoising {}".format(args['test_path']))
     logger.info("\tDenoised {} frames in {:.3f}s, loaded seq in {:.3f}s".
                 format(seq_length, runtime, loadtime))
-    logger.info(
-        "\tPSNR noisy {:.4f}dB, PSNR result {:.4f}dB".format(psnr_noisy, psnr))
+    # logger.info(
+    #     "\tPSNR noisy {:.4f}dB, PSNR result {:.4f}dB".format(psnr_noisy, psnr))
 
     # Save outputs
     if not args['dont_save_results']:

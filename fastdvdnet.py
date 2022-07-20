@@ -48,7 +48,6 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 	numframes, C, H, W = seq.shape
 	gray = 1 - grayscale(seq)
 	gray.to(seq.device)
-	print()
 	#gray = torch.mul(transforms.functional.invert(transform(seq)), noise_scaler)
 	ctrlfr_idx = int((temp_psz-1)//2)
 	inframes = list()
@@ -74,8 +73,9 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 
 		inframes_t = torch.stack(inframes, dim=0).contiguous().view((1, temp_psz*C, H, W)).to(seq.device)
 		noise_frame_t = torch.stack(noise_frame, dim=0)
+		noise_frame_t_clamped = torch.clamp(noise_frame_t, 0., 1.)
 		# append result to output list
-		denframes[fridx] = temp_denoise(model_temporal, inframes_t, noise_frame_t)
+		denframes[fridx] = temp_denoise(model_temporal, inframes_t, noise_frame_t_clamped)
 
 	# free memory up
 	del inframes
