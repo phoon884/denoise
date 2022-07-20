@@ -46,7 +46,7 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 	"""
 	# init arrays to handle contiguous frames and related patches
 	numframes, C, H, W = seq.shape
-	gray = 1 - grayscale(seq)
+	gray = grayscale(seq)
 	gray.to(seq.device)
 	#gray = torch.mul(transforms.functional.invert(transform(seq)), noise_scaler)
 	ctrlfr_idx = int((temp_psz-1)//2)
