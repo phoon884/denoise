@@ -54,7 +54,7 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 	noise_frame = list()
 	denframes = torch.empty((numframes, C, H, W)).to(seq.device)
 	# build noise map from noise std---assuming Gaussian noise
-	noise_map = noise_std.expand((numframes, 1, H, W)).to(seq.device) + (gray*noise_scaler).to(seq.device)
+	noise_map = noise_std.expand((numframes, 1, H, W)).to(seq.device) + (gamma(gray,2.2)*noise_scaler).to(seq.device)
 
 	for fridx in range(numframes):
 		# load input frames
@@ -96,3 +96,6 @@ def grayscale(seq):
 		gray = 0.2989 * r + 0.5870*g + 0.1140*b
 		res[i,:,:,:] = gray
 	return res
+
+def gamma(seq,amount):
+	return torch.pow(seq,1/amount)
