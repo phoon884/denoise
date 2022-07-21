@@ -33,7 +33,7 @@ def temp_denoise(model, noisyframe, sigma_noise):
 
 	return out
 
-def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_temporal):
+def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, gamma_val, temp_psz, model_temporal):
 	r"""Denoises a sequence of frames with FastDVDnet.
 
 	Args:
@@ -54,7 +54,7 @@ def denoise_seq_fastdvdnet(seq, noise_std, noise_scaler, temp_psz, model_tempora
 	noise_frame = list()
 	denframes = torch.empty((numframes, C, H, W)).to(seq.device)
 	# build noise map from noise std---assuming Gaussian noise
-	noise_map = noise_std.expand((numframes, 1, H, W)).to(seq.device) + (gamma(gray,2.2)*noise_scaler).to(seq.device)
+	noise_map = noise_std.expand((numframes, 1, H, W)).to(seq.device) + (gamma(gray,gamma_val)*noise_scaler).to(seq.device)
 
 	for fridx in range(numframes):
 		# load input frames

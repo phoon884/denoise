@@ -115,7 +115,8 @@ def test_fastdvdnet(**args):
                                            noise_std=noisestd,\
                                            temp_psz=NUM_IN_FR_EXT,\
                                            model_temporal=model_temp,\
-										   noise_scaler=args['noise_scaler'])
+										   noise_scaler=args['noise_scaler'],\
+                                           gamma_val=args['gamma'])
 
     # Compute PSNR and log it
     stop_time = time.time()
@@ -166,6 +167,7 @@ if __name__ == "__main__":
     parser.add_argument("--gray", action='store_true',
                         help='perform denoising of grayscale images instead of RGB')
     parser.add_argument("--noise_scaler",type=float,default=0.5)
+    parser.add_argument("--gamma",type=float,default=1)
 
     argspar = parser.parse_args()
     # Normalize noises ot [0, 1]
